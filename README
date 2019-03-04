@@ -1,0 +1,5 @@
+# Dominos Pizza Description
+Simple script to gather a description for a given pizza.
+
+It parses the menu to see where the pizza info page is and then grabs the
+description of that pizza.
