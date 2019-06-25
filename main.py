@@ -3,6 +3,7 @@
 """
 import sys
 import urllib.request
+import pdb
 from bs4 import BeautifulSoup
 
 BASE_URL = 'https://www.dominos.nl/'
@@ -38,10 +39,12 @@ def parse_links(html):
     soup = BeautifulSoup(html, features='html.parser')
     links = {}
     for link in soup.find_all('a'):
-        if link.has_attr('aria-label'):
-            name = link.get('aria-label').replace(', ', '').lower()
-            url = link.get('href')
-            links[name] = url
+        if link.has_attr('class') and 'product-page-link' in link.get('class'):
+            span = link.find_next('span')
+            if 'Pizza' in span.text:
+                name = span.text.replace('Pizza ', '').lower()
+                url = link.get('href')
+                links[name] = url
 
     return links
 
